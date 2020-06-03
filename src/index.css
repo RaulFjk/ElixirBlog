@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.home .card .row img {
+  height: 70px;
+  width: 70px;
+}
+
+.home .card-action .row button {
+
+  margin-right: 1em;
+ 
+}
+
+
+
+.profile .container .center img {
+
+  height: 70px;
+  width: 70px;
+
+}
