@@ -5,11 +5,12 @@ import BlogPost from '../blogPost.jpg'
 import axios from "axios";
 import Pagination from './Pagination'
 
+
 class Home extends Component {
   state = {
     posts: [],
     currentPage: 1,
-    postsPerPage: 10
+    postsPerPage: 12
   };
 
   componentDidMount() {
@@ -48,34 +49,38 @@ class Home extends Component {
     const currentPosts = this.state.posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const postList = this.state.posts.length ? (
+    <div className="container">
+      <div className="row">
+        {
       currentPosts.map((post) => {
         return (
-          <div className="row">
-        
-          <div className="card large" key={post.post_id}>
-            <div className="row valign-wrapper">
-                <img src={Avatar} className="circle" alt="Avatar" />
-                <span>
-                    <p>Posted by rduma</p>
-                    <p className="grey-text">3rd September</p>
-                </span>
-            </div>
-            <div className="card-image waves-effect waves-block waves-light">
-              <img className="activator"  src={BlogPost}/>
-            </div>
+
+             <div className="col s4">
+            <div className="card mystyle" key={post.post_id}>
+          <div className="card-image">
+            <img src={BlogPost}/>
+          </div>
             <div className="card-content">
               <Link to={"/posts/" + post.post_id}>
                 <span className="card-title">{post.title}</span>
               </Link>
               <p>{post.body}</p>
             </div>
-      
+            <div className="row ">
+              <div className="container">
+              <span> <p>Posted by {post.author}</p>
+                <p className="grey-text">{post.inserted_at}</p>
+                </span>
+            </div>
+            </div>
           </div>
           </div>
-  
+          
         );
       })
-    ) : (
+  }
+    </div>
+  </div>) : (
       <div className="center">No posts yet</div>
     );
     return (

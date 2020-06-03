@@ -15,6 +15,7 @@ import { getToken } from './components/utils/Common'
 import Profile from './components/Profile'
 import MyPosts from './components/MyPosts'
 import EditPost from './components/EditPost'
+import HomeTest from './components/HomeTest';
 
 class App extends Component {
   state = {

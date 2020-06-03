@@ -101,7 +101,7 @@ class SignIn2 extends Component {
             <div className="row">
                 <div className="col s12 m4 offset-m4">
                     <div className="card">
-                        <div className="card-action red darken-3 white-text">
+                        <div className="card-action transparent red darken-3 white-text">
                             <h3>Welcome</h3>
                         </div>
 

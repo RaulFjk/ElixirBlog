@@ -2,16 +2,22 @@
   "name": "blog_elixir",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node":"12.14.0",
+    "npm" : "6.13.4"
+  },
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
     "cors": "^2.8.5",
     "materialize-css": "^1.0.0-rc.2",
     "proxy": "^1.0.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

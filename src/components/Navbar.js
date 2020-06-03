@@ -10,7 +10,7 @@ const Navbar = props => {
 
     if ( getToken() ) {
         return (
-            <nav className="nav-wrapper red darken-3"> 
+            <nav className="nav-wrapper red darken-3 "> 
                 <div className="container">
                     <Link to='/' className="brand-logo">Elixir Blog</Link>
                     <SignedInLinks checkIfAuthenticated={props.checkIfAuthenticated} />
@@ -20,7 +20,7 @@ const Navbar = props => {
         }
 
         return (
-            <nav className="nav-wrapper red darken-3"> 
+            <nav className="nav-wrapper red darken-3 "> 
                 <div className="container">
                     <Link to='/' className="brand-logo">Elixir Blog</Link>
                 
