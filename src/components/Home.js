@@ -53,6 +53,8 @@ class Home extends Component {
       <div className="row">
         {
       currentPosts.map((post) => {
+        const cts = post.inserted_at;
+        const cdate = (new Date(cts)).toUTCString();
         return (
 
              <div className="col s4">
@@ -69,7 +71,7 @@ class Home extends Component {
             <div className="row ">
               <div className="container">
               <span> <p>Posted by {post.author}</p>
-                <p className="grey-text">{post.inserted_at}</p>
+                <p className="grey-text">{cdate}</p>
                 </span>
             </div>
             </div>
@@ -79,7 +81,7 @@ class Home extends Component {
         );
       })
   }
-    </div>
+</div>
   </div>) : (
       <div className="center">No posts yet</div>
     );

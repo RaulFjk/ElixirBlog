@@ -23,7 +23,6 @@ import cors from 'cors'
     }
     handleSubmit = (event) =>{
             var apiBaseUrl = "https://myblog-um.gigalixirapp.com";
-            console.log("values",this.state.username,this.state.email,this.state.first_name,this.state.last_name,this.state.password);
             //To be done:check for empty values before hitting submit
             var self = this;
             var payload={
@@ -37,14 +36,12 @@ import cors from 'cors'
             }
             axios.post(apiBaseUrl+'/signup', payload)
            .then(function (response) {
-             console.log(response);
-             if(response.data.code == 200){
                console.log("registration successfull");
-               this.setState({
+               self.setState({
                 registerState : true
             });
 
-             }
+             
            })
            .catch(function (error) {
              console.log(error);
@@ -54,7 +51,7 @@ import cors from 'cors'
 
 
         event.preventDefault();
-        console.log(this.state);
+       
     }
 
     render() {
@@ -92,7 +89,7 @@ import cors from 'cors'
                     </div>
                     
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Signup</button>
+                        <button className="btn red darken-3 waves-effect waves-light">Signup</button>
                     </div>
                 </form> 
                 

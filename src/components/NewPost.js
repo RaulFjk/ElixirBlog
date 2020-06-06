@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom';
+import { getUser } from './utils/Common'
 
  class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: ' ',
+        author: getUser(),
         postCreated: false
 
     }
@@ -30,7 +31,7 @@ import { Redirect } from 'react-router-dom';
             var payload={
                 "title":this.state.title,
                 "content": this.state.content,
-                "author": "rduma", 
+                "author": this.state.author, 
             }
             axios.post(apiBaseUrl+'/create_post', payload)
            .then(function (response) {

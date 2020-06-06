@@ -32,11 +32,6 @@ const handleLogOut = () => {
       <li>
         <a onClick={handleLogOut}>Log Out</a>
       </li>
-      <li>
-        <NavLink to="/" className="btn btn-floating pink lighten-1">
-          RD
-        </NavLink>
-      </li>
     </ul>
   );
 };

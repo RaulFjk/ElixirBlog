@@ -29,6 +29,19 @@ body {
   border-radius: 10px;
 }
 
+.mystyle .card-content .card-title{
+  max-height: 63px;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:200px;
+  display:inline-block;
+}
+
+.mystyle .row .container{
+  margin-right: 67px;
+}
+
  .home .card .row img {
   height: 30px;
   width: 30px;
@@ -47,4 +60,21 @@ body {
   height: 70px;
   width: 70px;
 
+}
+
+.third {
+  border-color: blue;
+  color: #fff;
+  box-shadow: 0 0 40px 40px blue inset, 0 0 0 0 blue;
+  transition: all 150ms ease-in-out;
+  
+
+}
+
+.postStyle .row .container{
+  margin-left: 976px;
+}
+
+.textArea .white .row .input-field.col.s12 .myTextArea{
+  height: 7rem !important;
 }

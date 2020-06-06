@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PostImage from '../NewYork.jpg'
 import axios from 'axios';
  
 
@@ -6,7 +7,9 @@ import axios from 'axios';
 class Post extends Component {
 
     state = {
-        post: null
+        post: null,
+        posted_at: ''
+
     }
 
 componentDidMount() {
@@ -26,16 +29,16 @@ componentDidMount() {
 
 getPost = async () => {
     let id = this.props.match.params.post_id;
-
-    
     axios.get("https://myblog-pm.gigalixirapp.com/get_post_by_id", {
         params: {
          id: id
         } 
         }).then((res) => {
+        const cts = res.data.post.inserted_at;
+        const cdate = (new Date(cts)).toUTCString();
       this.setState({
-    
-        post: res.data.post
+        post: res.data.post,
+        posted_at: cdate
       });
     });
 
@@ -45,9 +48,21 @@ getPost = async () => {
     render() {
 
         const post = this.state.post ? (
-            <div className="post">
-                <h4 className="center">{ this.state.post.title }</h4>
-                <p className="flow-text">{ this.state.post.content }</p>
+            
+            <div className="post postStyle">
+                <div className="row">
+                    <h4 class="center-align">{ this.state.post.title }</h4>
+                </div>
+                <div className="row">
+                    <div className="container">
+                        <span> <p>Posted by {this.state.post.author}</p>
+                        <p className="grey-text">{this.state.posted_at}</p>
+                        </span>
+                    </div>
+                </div>
+                <div className="row">
+                    <p className="flow-text">{ this.state.post.content }</p>
+                </div>
             </div>
         ) : (
             <div className="center">Loading post...</div>

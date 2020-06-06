@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom"; 
 import Avatar from "../avatar.jpg";
-import BlogPost from "../blog-header.jpg";
+import BlogPost from '../blogPost.jpg';
 import axios from "axios";
 import Pagination from "./Pagination";
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css' 
+import { getUser } from './utils/Common'
 
 class MyPosts extends Component {
   state = {
@@ -15,9 +18,13 @@ class MyPosts extends Component {
   };
 
   componentDidMount() {
-    axios.get("https://myblog-pm.gigalixirapp.com/get_posts").then((res) => {
+    const author = getUser();
+    axios.get("https://myblog-pm.gigalixirapp.com/get_posts_by_author",{
+      params: {
+        author: author
+       } 
+}).then((res) => {
       this.setState({
-        // posts: res.data
         posts: res.data.posts,
       });
     });
@@ -45,6 +52,44 @@ class MyPosts extends Component {
     //   });
   }
 
+handleOnDelete = (post_id) => {
+  const author = getUser();
+  confirmAlert({
+    title: 'Please confirm',
+    message: 'Are you sure you want to delete this post?',
+    buttons: [
+      {
+        label: 'Yes',
+        onClick: () => {
+          console.log('serus da');
+          axios.delete("https://myblog-pm.gigalixirapp.com/delete_post", {
+            params: {
+             id: post_id
+            } 
+            }).then((res) => {
+              axios.get("https://myblog-pm.gigalixirapp.com/get_posts_by_author",{
+                params: {
+                  author: author
+                 } 
+          }).then((res) => {
+                this.setState({
+                  // posts: res.data
+                  posts: res.data.posts
+                });})
+              console.log(this.state);
+        });
+      
+      
+      }
+      },
+      {
+        label: 'No',
+        onClick: () => {console.log('serus nu')}
+      }
+    ]
+  })
+}
+
   render() {
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
@@ -62,41 +107,51 @@ class MyPosts extends Component {
 
 
     const postList = this.state.posts.length ? (
+      <div className="container">
+      <div className="row">
+        {
       currentPosts.map((post) => {
+        const cts = post.inserted_at;
+        const cdate = (new Date(cts)).toUTCString();
         return (
-          <div className="card z-depth-0">
-            <div className="card medium" key={post.post_id}>
-              <div className="row valign-wrapper">
-                <img src={Avatar} className="circle" alt="Avatar" />
-                <span>
-                  <p>Posted by rduma</p>
-                  <p className="grey-text">3rd September</p>
-                </span>
-              </div> 
+          <div className="col s4">
+            <div className="card mystyle" key={post.post_id}>
+            <div className="card-image">
+              <img src={BlogPost}/>
+            </div>
                  <div className="card-content">
                 <Link to={"/posts/" + post.post_id}>
-                  <span className="card-title">{post.title}</span>
+                  <span className="card-title" >{post.title}</span>
                 </Link>
                 <p>{post.body}</p>
-                <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
               </div>
               <div className="card-action">
+
+              <div className="row ">
+              <div className="container">
+              <span> <p>Posted by {post.author}</p>
+                <p className="grey-text">{cdate}</p>
+                </span>
+            </div>
+            </div>
                   <div className="row">
-                <button className="btn pink lighten-1 z-depth-0" onClick={() => this.handleOnEdit(post.post_id)}>Edit Post</button>
+                <button className="btn red darken-3 waves-effect waves-light"  onClick={() => this.handleOnEdit(post.post_id)}>Edit Post</button>
             
-                <button className="btn pink lighten-1 z-depth-0">Delete Post</button></div>
+                <button className="btn red darken-3 waves-effect waves-light" onClick={() => this.handleOnDelete(post.post_id)}>Delete Post</button></div>
             </div>
             </div>
           </div>
         );
       })
-    ) : (
+    }
+</div>
+  </div>) : (
       <div className="center">No posts yet</div>
     );
+
     return (
       <div className="container home">
-        <h4 className="center">Home</h4>
+        <h4 className="center">My Posts</h4>
         {postList}
         <Pagination
           postsPerPage={this.state.postsPerPage}

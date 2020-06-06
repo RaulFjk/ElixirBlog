@@ -117,7 +117,7 @@ class SignIn2 extends Component {
                             </div><br/>
 
                             <div className="form-field">
-                            <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>Login</button>
+                            <button className="btn red darken-3 waves-effect waves-light" onClick={this.handleSubmit}>Login</button>
                             </div><br/>
 
                             <div className="form-field">

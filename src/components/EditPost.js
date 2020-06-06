@@ -70,7 +70,7 @@ class EditPost extends Component {
           
             axios.put("https://myblog-pm.gigalixirapp.com/update_post", payload)
             .then((response) => {
-                console.log(response);
+              
                 self.props.history.push('/myPosts/');
             }).catch(function (error) {
                 console.log(error);
@@ -85,17 +85,22 @@ class EditPost extends Component {
             return <div className="center"> Loading </div>
         }
         return (
-          <div className="container">
+          <div className="container textArea">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Edit Post</h5>
-                    <div className="input-field">
+                    <div className='row'>
+                    <div className="input-field col s12">
                         <label htmlFor="title">Title</label>
                         <input type="text" id="title" className="validate" onChange={this.handleChange} defaultValue={this.state.post.title}/>
                     </div>
-                    <div className="input-field" >
-                        <label htmlFor="content">Content</label>
-                        <textarea  id="content" className="materialize-textarea"  onChange={this.handleChange} defaultValue={this.state.post.content}></textarea>
                     </div>
+                    <div className="row">
+                    <div className="input-field col s12">
+                        <label htmlFor="content">Content</label> 
+                        <textarea  id="content" className="materialize-textarea myTextArea"  onChange={this.handleChange} defaultValue={this.state.post.content}></textarea>
+                    </div>    
+                    </div>
+                   
                     <div >
                         <button className="btn pink lighten-1 z-depth-0" onClick={(e) => {this.handleClick(e)}}>Update Post</button>
                     </div>
