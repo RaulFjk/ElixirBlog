@@ -15,13 +15,6 @@ class SignIn2 extends Component {
     
         }
   }
-    // state = {
-    //     username: '',
-    //     password: '',
-    //     loginStatus: false,
-    //     error: ''
-
-    // }
 
     
 
@@ -31,15 +24,17 @@ class SignIn2 extends Component {
            [e.target.id] : e.target.value
        });
     }
+
+
+    // Handles the login function when user presses the sign-in button
     handleSubmit = (e) =>{
         e.preventDefault();
 
         axios.post('https://myblog-um.gigalixirapp.com/login',{
             username: this.state.username, password: this.state.password
     }).then(response => {
-        setUserSession(response.data, this.state.username);
+        setUserSession(response.data.token, this.state.username);
         this.props.checkIfAuthenticated();
-         console.log(response.data);
          this.setState({
                  loginStatus : true
                 });
@@ -57,42 +52,12 @@ class SignIn2 extends Component {
       }
     });
      
-        
-    // axios.post('https://myblog-um.gigalixirapp.com/login',{
-    //     headers: {
-    //         'Access-Control-Allow-Origin': '*',
-    //       },
-    //     withCredentials: true,
-    //     params: {
-    //      username: this.state.email, password: this.state.password },
-    // }).then(response => {
-    //     setUserSession(response.data, this.state.email);
-    //     // this.props.history.push('/');
-    // //    this.setState({
-    // //      loginStatus : true
-    // //     });
-    //      console.log(response.data);
-    //      this.setState({
-    //              loginStatus : true
-    //             });
-        
-    //  }).catch(error => {
-    //   if (error.response.status === 401) {
-    //     this.setState({
-    //         error : error.response.data.message
-    //    });}
-    //   else {
-    //     this.setState({
-    //         error : 'Something went wrong. Please try again later.'
-    //    });
-    //   }
-    // });
      
     }
 
 
 
-
+//Render Function redirects user to Home Page if user logged in
     render() {
         if (this.state.loginStatus ) {
             return <Redirect to='/' />;

@@ -5,7 +5,7 @@ import SignedOutLinks from './SignedOutLinks';
 import { getToken } from '../components/utils/Common';
 
 
-// Check if user Authentificated or not in order to show the SignedInLinks/Out or not
+// Check if user Authentificated or not in order to show the SignedInLinks or not
 const Navbar = props => {
 
     if ( getToken() ) {

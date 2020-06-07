@@ -4,6 +4,7 @@ import Avatar from "../avatar.jpg";
 import BlogPost from '../blogPost.jpg'
 import axios from "axios";
 import Pagination from './Pagination'
+import { getToken, removeUserSession } from './utils/Common'
 
 
 class Home extends Component {
@@ -14,25 +15,24 @@ class Home extends Component {
   };
 
   componentDidMount() {
-   
+    let token = getToken();
 
-    axios.get("https://myblog-pm.gigalixirapp.com/get_posts").then((res) => {
+    axios.get("https://myblog-pm.gigalixirapp.com/get_posts",{
+      headers: {"Authorization" : `Bearer ${token}`},
+    }).then((res) => {
       this.setState({
-        // posts: res.data
         posts: res.data.posts
       });
+    }).catch(error => {
+      if (error.response.status === 401) {
+        removeUserSession();
+        this.props.history.push('/signin');
+       }
     });
-
-    // axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
-    //   this.setState({
-    //     // posts: res.data
-    //     posts: res.data
-    //   });
-    // });
-
     
   }
 
+  // This function takes care that no more than 12 posts are being displayed on one page
   paginate =  pageNumber => {
 
     this.setState({

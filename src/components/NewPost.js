@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom';
-import { getUser } from './utils/Common'
+import { getUser, getToken, removeUserSession } from './utils/Common'
 
  class NewPost extends Component {
     state = {
@@ -12,6 +12,7 @@ import { getUser } from './utils/Common'
 
     }
 
+    // This function updates the state of the componet by observing every change in the input fields
     handleChange = (e) =>{
        this.setState({
            [e.target.id] : e.target.value
@@ -19,36 +20,37 @@ import { getUser } from './utils/Common'
     }
     handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(this.state);
-
-        // https://myblog-pm.gigalixirapp.com/create_post?title=post1&content=post1 content&author=boss
+       
     }
-
+// Creates new post
     handleClick= (e) =>{
             var apiBaseUrl = "https://myblog-pm.gigalixirapp.com";
-            
+            let token = getToken();
             var self = this;
             var payload={
-                "title":this.state.title,
-                "content": this.state.content,
-                "author": this.state.author, 
+                title: this.state.title,
+                content: this.state.content,
+                author: this.state.author, 
             }
-            axios.post(apiBaseUrl+'/create_post', payload)
+            
+            let config = { headers: {"Authorization" : `Bearer ${token}`} };
+            axios.post(apiBaseUrl+'/create_post',payload ,config )
            .then(function (response) {
-             console.log(response);
              self.setState({
                 postCreated: true
              });
-           })
-           .catch(function (error) {
-             console.log(error);
-            });
+           }).catch(error => {
+            if (error.response.status === 401) {
+              removeUserSession();
+              this.props.history.push('/signin');
+             }
+          });
           
 
-        // https://myblog-pm.gigalixirapp.com/create_post?title=post1&content=post1 content&author=boss
+       
     }
 
-
+// If post created user will be redirected to home page
     render() {
         if( this.state.postCreated === true ){
             return <Redirect to='/' />

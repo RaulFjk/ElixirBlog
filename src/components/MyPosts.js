@@ -6,7 +6,7 @@ import axios from "axios";
 import Pagination from "./Pagination";
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css' 
-import { getUser } from './utils/Common'
+import { getUser, getToken,removeUserSession } from './utils/Common'
 
 class MyPosts extends Component {
   state = {
@@ -19,7 +19,9 @@ class MyPosts extends Component {
 
   componentDidMount() {
     const author = getUser();
+    let token = getToken();
     axios.get("https://myblog-pm.gigalixirapp.com/get_posts_by_author",{
+      headers: {"Authorization" : `Bearer ${token}`},
       params: {
         author: author
        } 
@@ -27,22 +29,25 @@ class MyPosts extends Component {
       this.setState({
         posts: res.data.posts,
       });
+    }).catch(error => {
+      if (error.response.status === 401) {
+        removeUserSession();
+        this.props.history.push('/signin');
+       }
     });
 
-    // axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
-    //   this.setState({
-    //     // posts: res.data
-    //     posts: res.data
-    //   });
-    // });
+
   }
 
+    // This function takes care that no more than 12 posts are being displayed on one page
   paginate = (pageNumber) => {
     this.setState({
       currentPage: pageNumber,
     });
   };
 
+
+  //Redirects user to edit page of the chosen post
   handleOnEdit = (post_id) => {
  
 
@@ -52,8 +57,10 @@ class MyPosts extends Component {
     //   });
   }
 
+  //Handles delete function when user clicks the delete Button
 handleOnDelete = (post_id) => {
   const author = getUser();
+  let token = getToken();
   confirmAlert({
     title: 'Please confirm',
     message: 'Are you sure you want to delete this post?',
@@ -63,11 +70,13 @@ handleOnDelete = (post_id) => {
         onClick: () => {
           console.log('serus da');
           axios.delete("https://myblog-pm.gigalixirapp.com/delete_post", {
+            headers: {"Authorization" : `Bearer ${token}`},
             params: {
              id: post_id
             } 
             }).then((res) => {
               axios.get("https://myblog-pm.gigalixirapp.com/get_posts_by_author",{
+                headers: {"Authorization" : `Bearer ${token}`},
                 params: {
                   author: author
                  } 
@@ -75,8 +84,18 @@ handleOnDelete = (post_id) => {
                 this.setState({
                   // posts: res.data
                   posts: res.data.posts
-                });})
+                });}).catch(error => {
+                  if (error.response.status === 401) {
+                    removeUserSession();
+                    this.props.history.push('/signin');
+                   }
+                });
               console.log(this.state);
+        }).catch(error => {
+          if (error.response.status === 401) {
+            removeUserSession();
+            this.props.history.push('/signin');
+           }
         });
       
       
@@ -97,13 +116,6 @@ handleOnDelete = (post_id) => {
       indexOfFirstPost,
       indexOfLastPost
     );
-
-// If edit Mode on then Redirect to Edit Page
-
-    // if ( this.state.editMode === true){
-    //     console.log(this);
-    //     return <Redirect to='editPost'  />;
-    // }
 
 
     const postList = this.state.posts.length ? (

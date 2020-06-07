@@ -15,12 +15,14 @@ import cors from 'cors'
     }
 
    
-
+// This function updates the state of the componet by observing every change in the input fields
     handleChange = (e) =>{
        this.setState({
            [e.target.id] : e.target.value
        });
     }
+
+    // Is triggered when user clicks the sign-up button and handles the sign-up functionality
     handleSubmit = (event) =>{
             var apiBaseUrl = "https://myblog-um.gigalixirapp.com";
             //To be done:check for empty values before hitting submit
@@ -53,7 +55,7 @@ import cors from 'cors'
         event.preventDefault();
        
     }
-
+// When user finishes the sign up, the app redirects him to sing in page 
     render() {
         
         if (this.state.registerState === true) {

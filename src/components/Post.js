@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PostImage from '../NewYork.jpg'
 import axios from 'axios';
+import { getToken } from './utils/Common'
  
 
 // Class based Components will automatically get the props in them
@@ -29,7 +30,10 @@ componentDidMount() {
 
 getPost = async () => {
     let id = this.props.match.params.post_id;
+    let token = getToken();
+    
     axios.get("https://myblog-pm.gigalixirapp.com/get_post_by_id", {
+        headers: {"Authorization" : `Bearer ${token}`},
         params: {
          id: id
         } 
@@ -51,7 +55,7 @@ getPost = async () => {
             
             <div className="post postStyle">
                 <div className="row">
-                    <h4 class="center-align">{ this.state.post.title }</h4>
+                    <h4 className="center-align">{ this.state.post.title }</h4>
                 </div>
                 <div className="row">
                     <div className="container">

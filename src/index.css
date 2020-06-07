@@ -39,7 +39,7 @@ body {
 }
 
 .mystyle .row .container{
-  margin-right: 67px;
+  margin-right: 50px;
 }
 
  .home .card .row img {
@@ -50,8 +50,13 @@ body {
 .home .card-action .row button {
 
   margin-right: 1em;
+  margin-bottom: 1em;
  
-} */
+} 
+
+.profileButton .row .container {
+  margin-left: 1200px;
+}
 
 
 
