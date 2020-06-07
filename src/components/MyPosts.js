@@ -7,6 +7,7 @@ import Pagination from "./Pagination";
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css' 
 import { getUser, getToken,removeUserSession } from './utils/Common'
+import _ from "lodash";
 
 class MyPosts extends Component {
   state = {
@@ -26,8 +27,12 @@ class MyPosts extends Component {
         author: author
        } 
 }).then((res) => {
+  let myArray = _.sortBy(res.data.posts, function(dateObj) {
+    return new Date(dateObj.inserted_at);
+  }).reverse();
       this.setState({
-        posts: res.data.posts,
+        posts: myArray
+        // posts: res.data.posts,
       });
     }).catch(error => {
       if (error.response.status === 401) {
@@ -81,9 +86,13 @@ handleOnDelete = (post_id) => {
                   author: author
                  } 
           }).then((res) => {
+              let myArray = _.sortBy(res.data.posts, function(dateObj) {
+              return new Date(dateObj.inserted_at);
+              }).reverse();
                 this.setState({
+                  posts: myArray
                   // posts: res.data
-                  posts: res.data.posts
+                  // posts: res.data.posts
                 });}).catch(error => {
                   if (error.response.status === 401) {
                     removeUserSession();

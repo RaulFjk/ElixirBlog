@@ -109,14 +109,14 @@ handleClick = (e) => {
           <div className="row">
             <div>
               <label htmlFor="firstName">First Name</label>
-              <input disabled id="firstName" type="text" value={this.state.firstName} className="validate" />
+              <input disabled id="firstName" type="text" value={this.state.firstName}  />
 
             </div>
             </div>
             <div className="row">
             <div >
               <label htmlFor="lastName">Last Name</label>
-              <input disabled id="lastName" type="text" value={this.state.lastName} className="validate" />
+              <input disabled id="lastName" type="text" value={this.state.lastName}  />
               
             </div>
           </div>
@@ -124,7 +124,7 @@ handleClick = (e) => {
           <div className="row">
             <div > 
               <label htmlFor="email">Email</label>
-              <input disabled id="email" type="text" value={this.state.email} autoComplete="new-password" className="validate" />
+              <input disabled id="email" type="text" value={this.state.email} autoComplete="new-password"  />
             </div>
           </div>
         </form>
@@ -148,14 +148,14 @@ handleClick = (e) => {
           <div className="row">
             <div>
               <label htmlFor="firstName">First Name</label>
-              <input  id="firstName" type="text" defaultValue={this.state.firstName} onChange={this.handleChange} className="validate" />
+              <input  id="firstName" type="text" defaultValue={this.state.firstName} onChange={this.handleChange}  />
 
             </div>
             </div>
             <div className="row">
             <div >
               <label htmlFor="lastName">Last Name</label>
-              <input id="lastName" type="text" defaultValue={this.state.lastName} onChange={this.handleChange} className="validate" />
+              <input id="lastName" type="text" defaultValue={this.state.lastName} onChange={this.handleChange}  />
               
             </div>
           </div>
@@ -163,7 +163,7 @@ handleClick = (e) => {
           <div className="row">
             <div > 
               <label htmlFor="email">Email</label>
-              <input  id="email" type="text" defaultValue={this.state.email} onChange={this.handleChange} autoComplete="new-password" className="validate" />
+              <input  id="email" type="text" defaultValue={this.state.email} onChange={this.handleChange} autoComplete="new-password"  />
             </div>
           </div>
             <div >

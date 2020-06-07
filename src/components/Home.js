@@ -5,6 +5,7 @@ import BlogPost from '../blogPost.jpg'
 import axios from "axios";
 import Pagination from './Pagination'
 import { getToken, removeUserSession } from './utils/Common'
+import _ from "lodash";
 
 
 class Home extends Component {
@@ -16,12 +17,17 @@ class Home extends Component {
 
   componentDidMount() {
     let token = getToken();
-
+    
     axios.get("https://myblog-pm.gigalixirapp.com/get_posts",{
       headers: {"Authorization" : `Bearer ${token}`},
     }).then((res) => {
+      let myArray = _.sortBy(res.data.posts, function(dateObj) {
+        return new Date(dateObj.inserted_at);
+      }).reverse();
+      // console.log(myArray);
       this.setState({
-        posts: res.data.posts
+        posts: myArray
+        // posts: res.data.posts
       });
     }).catch(error => {
       if (error.response.status === 401) {

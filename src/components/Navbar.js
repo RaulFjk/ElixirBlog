@@ -12,7 +12,7 @@ const Navbar = props => {
         return (
             <nav className="nav-wrapper red darken-3 "> 
                 <div className="container">
-                    <Link to='/' className="brand-logo">Elixir Blog</Link>
+                    <Link to='/' className="brand-logo">My Blog</Link>
                     <SignedInLinks checkIfAuthenticated={props.checkIfAuthenticated} />
                 </div>
             </nav>
@@ -22,7 +22,7 @@ const Navbar = props => {
         return (
             <nav className="nav-wrapper red darken-3 "> 
                 <div className="container">
-                    <Link to='/' className="brand-logo">Elixir Blog</Link>
+                    <Link to='/' className="brand-logo">My Blog</Link>
                 
                 </div>
             </nav>
