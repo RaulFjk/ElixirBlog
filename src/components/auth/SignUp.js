@@ -44,10 +44,14 @@ import cors from 'cors'
             });
 
              
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
+           }).catch(error => {
+            if (error.response.status === 400) {
+              alert("User already exists!");}
+            else {
+              alert("Something went wrong!");
+            }
+          });
+           
           
         
 

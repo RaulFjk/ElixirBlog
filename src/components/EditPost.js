@@ -55,6 +55,16 @@ class EditPost extends Component {
                 id: this.state.post.post_id
                 };
             }
+           if( this.state.title !== '' && this.state.content !== '' )
+            {
+                var payload={
+                    title: this.state.title,
+                    content: this.state.content,
+                    author: this.state.post.author, 
+                    id: this.state.post.post_id
+                    };
+
+            }
 
             if( this.state.content === ''){
                 var payload={
@@ -86,6 +96,9 @@ class EditPost extends Component {
                   removeUserSession();
                   this.props.history.push('/signin');
                  }
+                 else{
+                    alert("Something went wrong!");
+                 }
               });
      }
     
@@ -114,7 +127,7 @@ class EditPost extends Component {
                     </div>
                    
                     <div >
-                        <button className="btn pink lighten-1 z-depth-0" onClick={(e) => {this.handleClick(e)}}>Update Post</button>
+                        <button className="btn red darken-3 lighten-1 z-depth-0" onClick={(e) => {this.handleClick(e)}}>Update Post</button>
                     </div>
                 </form> 
                 

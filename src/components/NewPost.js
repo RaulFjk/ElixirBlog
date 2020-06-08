@@ -44,6 +44,9 @@ import { getUser, getToken, removeUserSession } from './utils/Common'
               removeUserSession();
               this.props.history.push('/signin');
              }
+             else{
+                alert("Something went wrong!");
+             }
           });
           
 
@@ -68,7 +71,7 @@ import { getUser, getToken, removeUserSession } from './utils/Common'
                         <textarea  id="content" className="materialize-textarea"  onChange={this.handleChange}></textarea>
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0" onClick={this.handleClick}>Post</button>
+                        <button className="btn red darken-3 lighten-1 z-depth-0" onClick={this.handleClick}>Post</button>
                     </div>
                 </form> 
                 

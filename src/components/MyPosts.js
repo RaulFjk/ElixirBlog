@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css' 
 import { getUser, getToken,removeUserSession } from './utils/Common'
 import _ from "lodash";
+import { Alert } from 'react-alert'
 
 class MyPosts extends Component {
   state = {
@@ -104,6 +105,9 @@ handleOnDelete = (post_id) => {
           if (error.response.status === 401) {
             removeUserSession();
             this.props.history.push('/signin');
+           }
+           else{
+            alert("Something went wrong!");
            }
         });
       

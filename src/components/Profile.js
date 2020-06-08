@@ -88,6 +88,10 @@ handleClick = (e) => {
           removeUserSession();
           this.props.history.push('/signin');
          }
+         else
+         {
+          alert("Something went wrong!");
+         }
       });
 }
     
