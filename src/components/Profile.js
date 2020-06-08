@@ -167,7 +167,7 @@ handleClick = (e) => {
             </div>
           </div>
             <div >
-              <button className="btn red darken-3 lighten-1 z-depth-0" onClick={(e) => {this.handleClick(e)}}>Update Post</button>
+              <button className="btn red darken-3 lighten-1 z-depth-0" onClick={(e) => {this.handleClick(e)}}>Update Profile</button>
             </div>
         </form>
       </div>
